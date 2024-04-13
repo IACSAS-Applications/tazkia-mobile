@@ -1,14 +1,12 @@
 import Icon from '@expo/vector-icons/Octicons';
 import { useNavigation } from '@react-navigation/native';
 import React, { ReactNode, forwardRef, useImperativeHandle, useLayoutEffect, useMemo, useState } from 'react';
-import { Pressable, StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import { Pressable, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import Animated, {
   FadeIn,
   FadeOut,
-  SlideInDown,
-  SlideOutDown,
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
@@ -93,14 +91,10 @@ const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(function Bottom
         <>
           <AnimatedPressable style={styles.backdrop} entering={FadeIn} exiting={FadeOut} onPress={toggleSheet} />
           <GestureDetector gesture={pan}>
-            <Animated.View
-              style={[styles.sheet, translateY]}
-              entering={SlideInDown.springify().damping(15)}
-              exiting={SlideOutDown}
-            >
+            <View style={[styles.sheet, translateY]}>
               <Icon name="horizontal-rule" size={45} onPress={toggleSheet} style={{ height: 40, marginTop: -12 }} />
               {props.content}
-            </Animated.View>
+            </View>
           </GestureDetector>
         </>
       )}

@@ -1,14 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Avatar } from 'react-native-paper';
-import Animated, {
-  SlideInUp,
-  SlideOutDown,
-  useAnimatedStyle,
-  useSharedValue,
-  withSequence,
-  withTiming,
-} from 'react-native-reanimated';
+import { useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
 import { Color } from '../../../constants/Color';
 import { Font } from '../../../constants/Font';
 import InvocationRepeat from '../../../domains/common/InvocationRepeat';
@@ -49,9 +42,7 @@ export default function ReaderItem({ index, total, value, ...props }: ReaderItem
   }
 
   return (
-    <Animated.View
-      entering={SlideInUp.delay(10).duration(1).springify().mass(1)}
-      exiting={SlideOutDown.mass(1)}
+    <View
       style={{ ...styles.touchable, backgroundColor: last ? Color.partProgressBgColor : Color.partDefaultBgColor }}
       onTouchStart={handlePress}
     >
@@ -71,14 +62,14 @@ export default function ReaderItem({ index, total, value, ...props }: ReaderItem
           <HStack style={GlobalStyles.spaceBetween}>
             <Text style={{ ...styles.tag, backgroundColor: Color.tagGreenLight }}>{`${index}/${total}`}</Text>
             {count > 0 && value.repeat > 1 && (
-              <Animated.View style={[GlobalStyles.center, countStyle]}>
+              <View style={[GlobalStyles.center, countStyle]}>
                 <Avatar.Text
                   label={count.toString()}
                   size={40}
                   style={styles.counter}
                   labelStyle={styles.counterLabel}
                 />
-              </Animated.View>
+              </View>
             )}
             <Text style={{ ...styles.tag, backgroundColor: Color.completed }}>
               {formatMessage(value.repeat > 1 ? TKeys.TIMES_COUNT_PLURAL : TKeys.TIMES_COUNT, {
@@ -88,7 +79,7 @@ export default function ReaderItem({ index, total, value, ...props }: ReaderItem
           </HStack>
         </View>
       )}
-    </Animated.View>
+    </View>
   );
 }
 

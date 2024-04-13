@@ -1,8 +1,8 @@
 import { BodyPartType, PurificationStage } from '../../../../../../domains/purification/BodyPart';
 
 import { useMemo, useRef } from 'react';
-import { ScrollView } from 'react-native';
-import Animated, { FadeInLeft, FadeInRight } from 'react-native-reanimated';
+import { ScrollView, View } from 'react-native';
+import { FadeInLeft, FadeInRight } from 'react-native-reanimated';
 import VStack from '../../../../../../components/stack/VStack';
 import { useMessage } from '../../../../../../hooks/use-message';
 import { useGlobal } from '../../../../../../providers/AppProvider';
@@ -33,13 +33,7 @@ export default function Rules({ mode, part, step, ...props }: Props) {
     <ScrollView>
       <VStack>
         {items.map((rule: string, index: number) => (
-          <Animated.View
-            key={index}
-            entering={fade
-              .delay(100 * index)
-              .duration(150)
-              .mass(2)}
-          >
+          <View key={index}>
             <Rule
               mode={mode}
               id={index + 1}
@@ -47,7 +41,7 @@ export default function Rules({ mode, part, step, ...props }: Props) {
               isLast={index === size - 1}
               onClick={handleClick}
             />
-          </Animated.View>
+          </View>
         ))}
       </VStack>
     </ScrollView>

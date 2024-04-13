@@ -1,6 +1,5 @@
 import { PropsWithChildren } from 'react';
 import { ImageSourcePropType, StyleSheet, View } from 'react-native';
-import Animated, { FadeInDown, FadeOutDown } from 'react-native-reanimated';
 import ImageLayout from '../../../components/ImageLayout';
 import Text from '../../../components/Text';
 import VStack from '../../../components/stack/VStack';
@@ -28,18 +27,14 @@ export default function PresentationLayout(props: Props) {
             <ImageLayout source={props.source} />
           </View>
         )}
-        <Animated.View
-          entering={FadeInDown.delay(300).duration(150).springify()}
-          exiting={FadeOutDown}
-          style={GlobalStyles.center}
-        >
+        <View style={GlobalStyles.center}>
           <Text variant="bodyLarge" style={{ fontSize: Font.size(arabic ? 16 : 14), fontFamily: 'Cairo' }}>
             {formatMessage(props.title)}
           </Text>
           <Text variant="bodyMedium" style={{ ...styles.description, fontSize: Font.size(arabic ? 16 : 14) }}>
             {formatMessage(props.description)}
           </Text>
-        </Animated.View>
+        </View>
       </VStack>
       {props.children && <View style={styles.children}>{props.children}</View>}
     </BasePresentationLayout>

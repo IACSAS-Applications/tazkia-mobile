@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { List } from 'react-native-paper';
 import InvocationGoodManners from '../../../../../components/InvocationGoodManners';
 import Text from '../../../../../components/Text';
@@ -40,14 +40,14 @@ export default function InvocationsScreen() {
     });
 
     return (
-      <Animated.View style={[styles.animatedContainer, animatedStyle]}>
+      <View style={[styles.animatedContainer, animatedStyle]}>
         <Animated.Image source={imageSource} style={[styles.animatedImage, animatedStyle]} />
-        <Animated.Text style={[styles.animatedText, animatedStyle]}>
+        <Text style={[styles.animatedText, animatedStyle]}>
           <Text variant="bodySmall" style={styles.croyance}>
             {text}
           </Text>
-        </Animated.Text>
-      </Animated.View>
+        </Text>
+      </View>
     );
   };
 

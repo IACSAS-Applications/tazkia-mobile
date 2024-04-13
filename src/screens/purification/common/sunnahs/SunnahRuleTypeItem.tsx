@@ -1,5 +1,6 @@
+import { View } from 'react-native';
 import { Avatar, Divider } from 'react-native-paper';
-import Animated, { FadeInLeft, FadeInRight } from 'react-native-reanimated';
+import { FadeInLeft, FadeInRight } from 'react-native-reanimated';
 import Text from '../../../../components/Text';
 import HStack from '../../../../components/stack/HStack';
 import { Font } from '../../../../constants/Font';
@@ -18,13 +19,7 @@ export default function SunnahRuleTypeItem({ index, summary, count, color }: Pro
   const fade = arabic ? FadeInRight : FadeInLeft;
 
   return (
-    <Animated.View
-      entering={fade
-        .delay(100 * index)
-        .duration(100)
-        .mass(2)}
-      style={{ paddingHorizontal: 7 }}
-    >
+    <View style={{ paddingHorizontal: 7 }}>
       <HStack spacing={5} style={{ ...GlobalStyles.center, paddingHorizontal: 5 }}>
         {count > 1 && (
           <Avatar.Text
@@ -39,6 +34,6 @@ export default function SunnahRuleTypeItem({ index, summary, count, color }: Pro
         </Text>
       </HStack>
       {count > 1 && index < count - 1 && <Divider />}
-    </Animated.View>
+    </View>
   );
 }

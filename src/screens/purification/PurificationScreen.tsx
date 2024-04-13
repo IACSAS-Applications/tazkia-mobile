@@ -2,7 +2,7 @@ import { lowerFirst } from 'lodash';
 import { useMemo, useRef, useState } from 'react';
 import { Linking, StyleSheet } from 'react-native';
 import { FAB } from 'react-native-paper';
-import Animated, { FadeInLeft, FadeInRight, FadeInUp, FadeOut } from 'react-native-reanimated';
+import Text from '../../components/Text';
 import SimpleDialog, { SimpleDialogRef } from '../../components/dialogs/SimpleDialog';
 import HStack from '../../components/stack/HStack';
 import VStack from '../../components/stack/VStack';
@@ -71,25 +71,13 @@ export default function PurificationScreen() {
       <VStack style={styles.container} spacing={15}>
         <VStack style={styles.top} spacing={2}>
           <HStack style={GlobalStyles.center} spacing={2}>
-            <Animated.Text
-              entering={FadeInRight.delay(200).duration(500).mass(2)}
-              exiting={FadeOut}
-              style={styles.title}
-            >
+            <Text style={styles.title}>
               {formatMessage(TKeys.PURIFICATION_TITLE)}
               {' : '}
-            </Animated.Text>
-            <Animated.Text
-              entering={FadeInLeft.delay(300).duration(500).mass(29)}
-              exiting={FadeOut}
-              style={styles.title}
-            >
-              {formatMessage(TKeys.PURIFICATION_TITLE_SUB)}
-            </Animated.Text>
+            </Text>
+            <Text style={styles.title}>{formatMessage(TKeys.PURIFICATION_TITLE_SUB)}</Text>
           </HStack>
-          <Animated.Text entering={FadeInUp.delay(500).duration(700).mass(1)} exiting={FadeOut} style={styles.sourat}>
-            {formatMessage(TKeys.SOURAT_A3LA)}
-          </Animated.Text>
+          <Text style={styles.sourat}>{formatMessage(TKeys.SOURAT_A3LA)}</Text>
         </VStack>
         <VStack spacing={17}>
           {parts.map((item: Part, index: number) => (

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
+import { FlatList, View } from 'react-native';
 import { Divider } from 'react-native-paper';
 import { AvatarImageSource } from 'react-native-paper/lib/typescript/components/Avatar/AvatarImage';
-import Animated, { FadeInUp, SlideOutDown } from 'react-native-reanimated';
 import { localesTranslation } from '../../../../locales';
 import { SupportedLocale } from '../../../../locales/types';
 import { useGlobal } from '../../../../providers/AppProvider';
@@ -27,8 +27,8 @@ export default function LanguageSelector({ flags, color, all, onChange }: Langua
   }
 
   return (
-    <Animated.View entering={FadeInUp.duration(10).springify()} exiting={SlideOutDown} style={{ paddingVertical: 10 }}>
-      <Animated.FlatList
+    <View style={{ paddingVertical: 10 }}>
+      <FlatList
         data={keys}
         renderItem={({ item }) => (
           <LanguageOption icon={flags[item]} value={item} color={color} onChange={handleChange} />
@@ -37,6 +37,6 @@ export default function LanguageSelector({ flags, color, all, onChange }: Langua
         alwaysBounceVertical={false}
         style={{ backgroundColor: 'transparent', marginLeft: 35, maxHeight: 275 }}
       />
-    </Animated.View>
+    </View>
   );
 }

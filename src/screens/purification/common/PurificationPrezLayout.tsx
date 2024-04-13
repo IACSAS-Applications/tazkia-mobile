@@ -1,6 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { ColorValue } from 'react-native';
-import Animated, { FadeInDown, FadeOutDown } from 'react-native-reanimated';
+import { ColorValue, View } from 'react-native';
 import Basmalah from '../../../components/Basmalah';
 import Text from '../../../components/Text';
 import VStack from '../../../components/stack/VStack';
@@ -21,11 +20,7 @@ export default function PurificationPrezLayout(props: Props) {
   const { arabic } = useGlobal();
 
   return (
-    <Animated.View
-      entering={FadeInDown.delay(300).duration(150).springify()}
-      exiting={FadeOutDown}
-      style={GlobalStyles.center}
-    >
+    <View style={GlobalStyles.center}>
       <VStack>
         <VStack spacing={2}>
           <Text
@@ -47,6 +42,6 @@ export default function PurificationPrezLayout(props: Props) {
         </VStack>
         {props.children}
       </VStack>
-    </Animated.View>
+    </View>
   );
 }

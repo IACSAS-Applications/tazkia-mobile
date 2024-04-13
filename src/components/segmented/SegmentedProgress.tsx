@@ -1,4 +1,4 @@
-import Animated, { FadeInLeft } from 'react-native-reanimated';
+import { View } from 'react-native';
 import HStack from '../stack/HStack';
 import SegmentedItem from './SegmentedItem';
 
@@ -15,9 +15,9 @@ export default function SegmentedProgress({ progress }: Props) {
   return (
     <HStack spacing={0} center>
       {progress.map((item, index) => (
-        <Animated.View key={index} entering={FadeInLeft.delay(250 * index)}>
+        <View key={index}>
           <SegmentedItem label={item} roundedStart={index === 0} roundedEnd={index === size - 1} />
-        </Animated.View>
+        </View>
       ))}
     </HStack>
   );

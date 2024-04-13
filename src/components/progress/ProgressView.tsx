@@ -1,7 +1,6 @@
 import { ReactNode, useRef } from 'react';
 import { PrimitiveType } from 'react-intl';
 import { StyleSheet, View } from 'react-native';
-import Animated, { FadeInUp, FadeOutDown } from 'react-native-reanimated';
 import { Color } from '../../constants/Color';
 import { SCREEN_WIDTH } from '../../constants/Screen';
 import ProgressLine from '../../domains/common/ProgressLine';
@@ -49,11 +48,7 @@ export default function ProgressView(props: ProgressViewProps) {
   }
 
   return (
-    <Animated.View
-      entering={FadeInUp.delay(100).duration(100).springify()}
-      exiting={FadeOutDown}
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <Header
         titleKey={props.titleKey}
         titleKeyParams={props.titleKeyParams}
@@ -90,7 +85,7 @@ export default function ProgressView(props: ProgressViewProps) {
         )}
       </View>
       <ConfirmRestartDialog ref={ref} onConfirm={handleConfirm} />
-    </Animated.View>
+    </View>
   );
 }
 

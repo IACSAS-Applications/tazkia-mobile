@@ -1,7 +1,6 @@
-import { useColorScheme } from 'react-native';
+import { View, useColorScheme } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Divider } from 'react-native-paper';
-import Animated, { FadeInUp } from 'react-native-reanimated';
 import VStack from '../../stack/VStack';
 import { ResetSetting } from './ResetSetting';
 import LanguageSetting from './language/LanguageSetting';
@@ -15,13 +14,13 @@ export default function Settings({ onClick }: Props) {
 
   return (
     <GestureHandlerRootView>
-      <Animated.View entering={FadeInUp.delay(100).duration(10).springify()} style={{ backgroundColor: 'transparent' }}>
+      <View style={{ backgroundColor: 'transparent' }}>
         <VStack>
           <LanguageSetting color={color} onClick={onClick} />
           <Divider />
           <ResetSetting onClick={onClick} />
         </VStack>
-      </Animated.View>
+      </View>
     </GestureHandlerRootView>
   );
 }

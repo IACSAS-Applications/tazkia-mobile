@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Linking, StyleSheet, TouchableOpacity, ViewToken } from 'react-native';
+import { Image, Linking, StyleSheet, TouchableOpacity, View, ViewToken } from 'react-native';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import Text from '../../../components/Text';
 import HStack from '../../../components/stack/HStack';
@@ -37,7 +37,7 @@ export const FlatBook: React.FC<Props> = React.memo(({ book, viewableItems, tota
   };
 
   return (
-    <Animated.View
+    <View
       style={[rowStyle, styles.row, { marginBottom: total === book.id ? 80 : 2, marginTop: book.id === 1 ? 15 : 7 }]}
     >
       <VStack spacing={10}>
@@ -58,7 +58,7 @@ export const FlatBook: React.FC<Props> = React.memo(({ book, viewableItems, tota
           </VStack>
         </HStack>
       </VStack>
-    </Animated.View>
+    </View>
   );
 });
 

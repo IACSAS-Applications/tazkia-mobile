@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { StyleSheet, ViewToken } from 'react-native';
+import { StyleSheet, View, ViewToken } from 'react-native';
 import { Avatar } from 'react-native-paper';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import Text from '../../../components/Text';
@@ -42,7 +42,7 @@ function Chapter({ chapter, total, viewableItems, ...props }: Props) {
   }
 
   return (
-    <Animated.View
+    <View
       style={[
         animatedStyle,
         styles.row,
@@ -69,7 +69,7 @@ function Chapter({ chapter, total, viewableItems, ...props }: Props) {
           {formatMessage(titleKey)}
         </Text>
       </HStack>
-    </Animated.View>
+    </View>
   );
 }
 

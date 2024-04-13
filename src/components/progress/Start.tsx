@@ -1,7 +1,6 @@
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-paper';
-import Animated, { SlideInDown } from 'react-native-reanimated';
 import { Font } from '../../constants/Font';
 import { useMessage } from '../../hooks/use-message';
 import { TKeys } from '../../locales/constants';
@@ -16,7 +15,7 @@ export default function Start(props: Props) {
   const { arabic } = useGlobal();
 
   return (
-    <Animated.View entering={SlideInDown.duration(30)}>
+    <View>
       <Button
         mode="elevated"
         icon={() => <Icon name="clock-plus" size={17} color="teal" />}
@@ -28,7 +27,7 @@ export default function Start(props: Props) {
       >
         {formatMessage(TKeys.BUTTON_START)}
       </Button>
-    </Animated.View>
+    </View>
   );
 }
 

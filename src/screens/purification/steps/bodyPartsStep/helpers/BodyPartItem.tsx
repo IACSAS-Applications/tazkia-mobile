@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { ImageSourcePropType, StyleSheet } from 'react-native';
+import { ImageSourcePropType, StyleSheet, View } from 'react-native';
 import { Avatar } from 'react-native-paper';
-import Animated, { FadeInDown, SlideInUp, SlideOutDown } from 'react-native-reanimated';
 import Text from '../../../../../components/Text';
 import { ProgressStatus } from '../../../../../components/progress/progressStatus/ProgressStatus';
 import { Color } from '../../../../../constants/Color';
@@ -61,11 +60,7 @@ export default function BodyPartItem({ id, part, imageSource, ...props }: BodyPa
   const space = arabic ? 15 : 1;
 
   return (
-    <Animated.View
-      entering={FadeInDown.delay(fadeSpeed).duration(fadeSpeed).mass(1).springify()}
-      style={{ ...styles.container, backgroundColor }}
-      onTouchStart={() => props.onPress(part)}
-    >
+    <View style={{ ...styles.container, backgroundColor }} onTouchStart={() => props.onPress(part)}>
       <Avatar.Image size={50} style={styles.typeAvatar} source={imageSource} />
       <Avatar.Text
         size={25}
@@ -88,32 +83,24 @@ export default function BodyPartItem({ id, part, imageSource, ...props }: BodyPa
       {inProgress && (
         <>
           {current.enlightenment && (
-            <Animated.View
-              entering={SlideInUp.delay(100).duration(50).mass(1).springify()}
-              exiting={SlideOutDown.delay(200).duration(200)}
-              style={[styles.stage, { right: space }]}
-            >
+            <View style={[styles.stage, { right: space }]}>
               <Text variant={labelVariant as any} style={stageStyle}>
                 {formatMessage(TKeys.BUTTON_ENLIGHTENMENT)}
               </Text>
               {statusOf('enlightenment')}
-            </Animated.View>
+            </View>
           )}
           {current.cleaning && (
-            <Animated.View
-              entering={SlideInUp.delay(100).duration(50).mass(1).springify()}
-              exiting={SlideOutDown.delay(200).duration(200)}
-              style={[styles.stage, { left: space }]}
-            >
+            <View style={[styles.stage, { left: space }]}>
               <Text variant={labelVariant as any} style={stageStyle}>
                 {formatMessage(TKeys.BUTTON_CLEANING)}
               </Text>
               {statusOf('cleaning')}
-            </Animated.View>
+            </View>
           )}
         </>
       )}
-    </Animated.View>
+    </View>
   );
 }
 

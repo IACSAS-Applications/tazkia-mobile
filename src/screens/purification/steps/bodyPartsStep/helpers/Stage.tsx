@@ -4,7 +4,6 @@ import { Button, Divider } from 'react-native-paper';
 import Text from '../../../../../components/Text';
 
 import { useEffect, useState } from 'react';
-import Animated, { FadeInDown } from 'react-native-reanimated';
 import Restart from '../../../../../components/progress/Restart';
 import Start from '../../../../../components/progress/Start';
 import ProgressInfos from '../../../../../components/progress/progressStatus/ProgressInfos';
@@ -13,6 +12,7 @@ import HStack from '../../../../../components/stack/HStack';
 import VStack from '../../../../../components/stack/VStack';
 import { Color } from '../../../../../constants/Color';
 import { Font } from '../../../../../constants/Font';
+import { isAndroid } from '../../../../../constants/Platform';
 import { SCREEN_WIDTH } from '../../../../../constants/Screen';
 import ProgressLine from '../../../../../domains/common/ProgressLine';
 import { BodyPartType, PurificationStage } from '../../../../../domains/purification/BodyPart';
@@ -159,7 +159,7 @@ export default function Stage({ part, stage, ...props }: Props) {
         </View>
       </HStack>
       {showDetails && (
-        <Animated.View entering={FadeInDown.springify()} style={styles.footer}>
+        <View style={styles.footer}>
           <VStack style={GlobalStyles.center} spacing={5}>
             {hasProgress && (
               <HStack spacing={25}>
@@ -192,11 +192,11 @@ export default function Stage({ part, stage, ...props }: Props) {
                   failed={progressProps.failed}
                   maxDays={PURIFICATION_MAX_DAYS}
                 />
-                <GridButton onShow={handleHistory} />
+                {isAndroid && <GridButton onShow={handleHistory} />}
               </HStack>
             )}
           </VStack>
-        </Animated.View>
+        </View>
       )}
     </View>
   );

@@ -2,13 +2,13 @@ import React, { ReactNode, useCallback, useState } from 'react';
 import { PrimitiveType } from 'react-intl';
 import { StyleSheet, View } from 'react-native';
 import { Divider } from 'react-native-paper';
-import Animated, { FadeIn, FadeInUp, FadeOutUp, SlideOutDown, SlideOutUp } from 'react-native-reanimated';
 import { Font } from '../../constants/Font';
 import ProgressLine from '../../domains/common/ProgressLine';
 import { useMessage } from '../../hooks/use-message';
 import { ProgressProps } from '../../hooks/use-progress';
 import { useGlobal } from '../../providers/AppProvider';
 import StatusAndEvaluation from '../../screens/purification/common/StatusAndEvaluation';
+import Text from '../Text';
 import YesNoButtons from './YesNoButtons';
 
 type Props = ProgressProps & {
@@ -40,32 +40,18 @@ export default function RuleProgress({ progress, ...props }: Props) {
   return (
     <View style={{ paddingBottom: 10, paddingTop: 5 }}>
       {showEvalute && (
-        <Animated.Text
-          entering={FadeIn.delay(400).duration(800).springify()}
-          exiting={SlideOutUp}
-          style={{ ...styles.question, fontSize: Font.size(arabic ? 18 : 16) }}
-        >
+        <Text style={{ ...styles.question, fontSize: Font.size(arabic ? 18 : 16) }}>
           {formatMessage(`progress.evaluation.question${props.questionMultiple ? 's' : ''}`)}
-        </Animated.Text>
+        </Text>
       )}
       <View style={{ paddingHorizontal: 15 }}>
         {props.summary ?? (
-          <Animated.Text
-            entering={FadeInUp.springify().delay(100).duration(300)}
-            exiting={FadeOutUp.delay(100).duration(200)}
-            style={styles.levelSummary}
-          >
-            {formatMessage(props.summaryKey, props.summaryKeyProps)}
-          </Animated.Text>
+          <Text style={styles.levelSummary}>{formatMessage(props.summaryKey, props.summaryKeyProps)}</Text>
         )}
       </View>
       {showEvalute && <YesNoButtons onEvaluate={handleEvaluate} />}
       {props.lastDay && !showEvalute && (
-        <Animated.View
-          entering={FadeInUp.delay(400).duration(800).springify()}
-          exiting={SlideOutDown.delay(10).damping(100)}
-          style={{ paddingTop: 15, minWidth: '105%' }}
-        >
+        <View style={{ paddingTop: 15, minWidth: '105%' }}>
           <Divider style={{ height: 1 }} />
           <StatusAndEvaluation
             {...props}
@@ -75,7 +61,7 @@ export default function RuleProgress({ progress, ...props }: Props) {
             onEvaluate={handleEvaluateShow}
             onHistory={props.onHistory}
           />
-        </Animated.View>
+        </View>
       )}
     </View>
   );

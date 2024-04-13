@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
-import { Image, ImageSourcePropType, StyleProp, StyleSheet } from 'react-native';
-import Animated, { FadeInDown, FadeInLeft, FadeOut } from 'react-native-reanimated';
+import { Image, ImageSourcePropType, StyleProp, StyleSheet, View } from 'react-native';
+import Text from '../../../components/Text';
 import VStack from '../../../components/stack/VStack';
 import { Color } from '../../../constants/Color';
 import { Font } from '../../../constants/Font';
@@ -32,19 +32,10 @@ export default function Pressable({ index, item, nameTextSize, descriptionTextSi
   }
 
   return (
-    <Animated.View
-      entering={FadeInDown.delay(100 * (index * 1))
-        .duration(400)
-        .mass(1)}
-      exiting={FadeOut}
-      style={{ ...props.style, backgroundColor: Color.partDefaultBgColor }}
-      onTouchStart={handlePress}
-    >
+    <View style={{ ...props.style, backgroundColor: Color.partDefaultBgColor }} onTouchStart={handlePress}>
       <VStack style={styles.container} spacing={8}>
         <Image source={item.imageSource} style={styles.img} />
-        <Animated.Text
-          entering={FadeInLeft.delay(400).duration(600).mass(1)}
-          exiting={FadeOut}
+        <Text
           style={{
             fontFamily: 'ReemKufiFun',
             fontSize: Font.size(descriptionTextSize ?? arabic ? 14 : 13),
@@ -52,9 +43,9 @@ export default function Pressable({ index, item, nameTextSize, descriptionTextSi
           }}
         >
           {formatMessage(item.description)}
-        </Animated.Text>
+        </Text>
       </VStack>
-    </Animated.View>
+    </View>
   );
 }
 

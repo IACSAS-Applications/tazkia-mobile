@@ -2,7 +2,6 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Avatar } from 'react-native-paper';
-import Animated, { FadeInUp, FadeOut, SlideInDown } from 'react-native-reanimated';
 import Text from '../../../components/Text';
 import SimpleDialog, { SimpleDialogRef } from '../../../components/dialogs/SimpleDialog';
 import HStack from '../../../components/stack/HStack';
@@ -33,9 +32,7 @@ export default function AhzabsInvocationsScreen() {
   return (
     <VStack style={styles.container} spacing={10}>
       <VStack spacing={5} style={styles.header}>
-        <Animated.Text entering={FadeInUp.delay(700).duration(500).mass(15)} exiting={FadeOut} style={styles.bookTitle}>
-          {formatMessage(TKeys.INVOCATION_AHZABS_TITLE)}
-        </Animated.Text>
+        <Text style={styles.bookTitle}>{formatMessage(TKeys.INVOCATION_AHZABS_TITLE)}</Text>
       </VStack>
       <View style={styles.common} onTouchEnd={() => handleSelect(-1)}>
         <Text variant="titleLarge" style={styles.commonBody}>
@@ -43,15 +40,7 @@ export default function AhzabsInvocationsScreen() {
         </Text>
       </View>
       {[1, 2, 3].map((section: number) => (
-        <Animated.View
-          key={section}
-          entering={SlideInDown.delay(50 * section)
-            .duration(200 * section)
-            .mass(2)}
-          exiting={FadeOut}
-          style={styles.pressable}
-          onTouchEnd={() => handleSelect(section)}
-        >
+        <View key={section} style={styles.pressable} onTouchEnd={() => handleSelect(section)}>
           <View style={{ width: SCREEN_WIDTH - 32 }}>
             <HStack style={styles.titleContainer}>
               <Avatar.Text
@@ -65,7 +54,7 @@ export default function AhzabsInvocationsScreen() {
               </Text>
             </HStack>
           </View>
-        </Animated.View>
+        </View>
       ))}
 
       <View style={styles.common} onTouchEnd={() => handleSelect(-2)}>

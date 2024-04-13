@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, ReactElement } from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native';
 import { TapGestureHandler, TapGestureHandlerGestureEvent } from 'react-native-gesture-handler';
-import Animated, {
+import {
   measure,
   runOnJS,
   useAnimatedGestureHandler,
@@ -76,10 +76,10 @@ export default function Ripple({ style, onTap, children }: RippleProps): ReactEl
   return (
     <View ref={aRef} style={style}>
       <TapGestureHandler onGestureEvent={tapGestureEvent}>
-        <Animated.View style={[style, { overflow: 'hidden' }]}>
+        <View style={[style, { overflow: 'hidden' }]}>
           <View>{children}</View>
-          <Animated.View style={rStyle} />
-        </Animated.View>
+          <View style={rStyle} />
+        </View>
       </TapGestureHandler>
     </View>
   );

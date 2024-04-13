@@ -1,14 +1,8 @@
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import { memo, useState } from 'react';
-import { StyleSheet, ViewToken } from 'react-native';
+import { StyleSheet, View, ViewToken } from 'react-native';
 import { Avatar } from 'react-native-paper';
-import Animated, {
-  SlideInLeft,
-  useAnimatedStyle,
-  useSharedValue,
-  withSequence,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
 import Text from '../../../components/Text';
 import HStack from '../../../components/stack/HStack';
 import VStack from '../../../components/stack/VStack';
@@ -53,7 +47,7 @@ function Immunization({ index, item, total, viewableItems }: Props) {
   }
 
   return (
-    <Animated.View
+    <View
       style={[
         animatedStyle,
         styles.row,
@@ -83,7 +77,7 @@ function Immunization({ index, item, total, viewableItems }: Props) {
               {formatMessage(item.repeat > 1 ? TKeys.TIMES_COUNT_PLURAL : TKeys.TIMES_COUNT, { times: item.repeat })}
             </Text>
             {count > 0 && (
-              <Animated.View style={countStyle}>
+              <View style={countStyle}>
                 {count < item.repeat ? (
                   <Avatar.Text
                     label={count.toString()}
@@ -92,16 +86,16 @@ function Immunization({ index, item, total, viewableItems }: Props) {
                     style={styles.counter}
                   />
                 ) : (
-                  <Animated.View entering={SlideInLeft.springify()}>
+                  <View>
                     <Icon name="check-all" color="green" size={25} style={styles.checkIcon} />
-                  </Animated.View>
+                  </View>
                 )}
-              </Animated.View>
+              </View>
             )}
           </HStack>
         )}
       </VStack>
-    </Animated.View>
+    </View>
   );
 }
 

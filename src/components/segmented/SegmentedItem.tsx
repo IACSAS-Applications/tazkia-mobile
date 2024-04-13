@@ -1,4 +1,4 @@
-import Animated from 'react-native-reanimated';
+import { View } from 'react-native';
 import GlobalStyles from '../../styles/GlobalStyles';
 import Text from '../Text';
 
@@ -11,7 +11,7 @@ export default function SegmentedItem({ label, roundedStart, roundedEnd }: Props
   const rStart = roundedStart ? 15 : 0;
   const rEnd = roundedEnd ? 15 : 0;
   return (
-    <Animated.View
+    <View
       style={{
         ...GlobalStyles.center,
         borderTopEndRadius: rEnd,
@@ -32,6 +32,6 @@ export default function SegmentedItem({ label, roundedStart, roundedEnd }: Props
       >
         {label}
       </Text>
-    </Animated.View>
+    </View>
   );
 }

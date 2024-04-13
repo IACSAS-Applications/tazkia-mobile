@@ -2,7 +2,6 @@ import { useNavigation } from '@react-navigation/native';
 import React, { ReactNode, useMemo, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Avatar } from 'react-native-paper';
-import Animated, { FadeInDown } from 'react-native-reanimated';
 import Text from '../../components/Text';
 import BottomSheet, { BottomSheetRef } from '../../components/bottomSheet/BottomSheet';
 import SimpleDialog, { SimpleDialogRef } from '../../components/dialogs/SimpleDialog';
@@ -73,14 +72,7 @@ export default function InvocationsScreen() {
     <BottomSheet ref={ref} content={content}>
       <VStack spacing={15} style={styles.container}>
         {parts.map((item, index: number) => (
-          <Animated.View
-            key={index}
-            entering={FadeInDown.delay(150 * (index * 1))
-              .duration(400)
-              .mass(1)}
-            style={styles.part}
-            onTouchStart={() => handlePress(item.route)}
-          >
+          <View key={index} style={styles.part} onTouchStart={() => handlePress(item.route)}>
             {item.image && <Avatar.Image source={item.image} size={95} style={styles.image} />}
             <View style={styles.summary}>
               <Text
@@ -90,7 +82,7 @@ export default function InvocationsScreen() {
                 {formatMessage(item.name)}
               </Text>
             </View>
-          </Animated.View>
+          </View>
         ))}
       </VStack>
       <SimpleDialog ref={dialogRef} />

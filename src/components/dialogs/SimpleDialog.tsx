@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { forwardRef, useImperativeHandle, useState } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { Dialog, FAB, Portal } from 'react-native-paper';
-import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { Color } from '../../constants/Color';
 import { Font } from '../../constants/Font';
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants/Screen';
@@ -59,12 +58,8 @@ const SimpleDialog = forwardRef<SimpleDialogRef>((_, ref) => {
         <Dialog.ScrollArea style={styles.contentContainer}>
           <ScrollView contentInsetAdjustmentBehavior="automatic" contentContainerStyle={GlobalStyles.center}>
             <VStack style={styles.main} spacing={5}>
-              {titleKey && (
-                <Animated.Text entering={FadeInUp.duration(50).springify()} style={styles.title}>
-                  {formatMessage(titleKey)}
-                </Animated.Text>
-              )}
-              <Animated.View entering={FadeInDown.duration(50).springify()}>
+              {titleKey && <Text style={styles.title}>{formatMessage(titleKey)}</Text>}
+              <View>
                 <VStack>
                   {contentKeys.map((key) => (
                     <Text variant="bodySmall" key={key} style={styles.contentText}>
@@ -72,7 +67,7 @@ const SimpleDialog = forwardRef<SimpleDialogRef>((_, ref) => {
                     </Text>
                   ))}
                 </VStack>
-              </Animated.View>
+              </View>
             </VStack>
           </ScrollView>
           <FAB

@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { StyleSheet, View, ViewToken } from 'react-native';
 import { Avatar } from 'react-native-paper';
-import Animated, { SlideInLeft, useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import Text from '../../../components/Text';
 import HStack from '../../../components/stack/HStack';
 import VStack from '../../../components/stack/VStack';
@@ -44,7 +44,7 @@ function Chapter({ section, chapter, total, viewableItems, metaData, onSelect }:
   }
 
   return (
-    <Animated.View
+    <View
       style={[
         animatedStyle,
         styles.row,
@@ -69,14 +69,14 @@ function Chapter({ section, chapter, total, viewableItems, metaData, onSelect }:
               </Text>
             )}
             {readAtSpecificTime && (
-              <Animated.Text entering={SlideInLeft.delay(50).damping(10).duration(40).springify()} style={styles.when}>
+              <Text style={styles.when}>
                 {formatMessage(`invocations.ahzabs.section.${section}.chapter.${chapter}.when`)}
-              </Animated.Text>
+              </Text>
             )}
           </VStack>
         </HStack>
       </View>
-    </Animated.View>
+    </View>
   );
 }
 

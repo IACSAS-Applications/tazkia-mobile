@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
-import { StyleSheet } from 'react-native';
-import Animated, { FadeIn, FadeInUp, FadeOutDown } from 'react-native-reanimated';
+import { StyleSheet, View } from 'react-native';
+import Animated, { FadeIn, FadeOutDown } from 'react-native-reanimated';
+import Text from '../../../../../components/Text';
 import ConfirmRestartDialog, { ConfirmRestartDialogRef } from '../../../../../components/dialogs/ConfirmRestartDialog';
 import ProgressDialog, { ProgressDialogRef } from '../../../../../components/dialogs/ProgressDialog';
 import VStack from '../../../../../components/stack/VStack';
@@ -87,18 +88,12 @@ export default function StageSelector({ part, ...props }: Props) {
   }
 
   return (
-    <Animated.View entering={FadeInUp.delay(100).duration(50).springify()} style={styles.container}>
+    <View style={styles.container}>
       <VStack style={styles.header} spacing={2}>
         {imageSource && (
           <Animated.Image source={imageSource} entering={FadeIn} exiting={FadeOutDown} style={styles.image} />
         )}
-        <Animated.Text
-          entering={FadeInUp.delay(300).duration(200).mass(1).springify()}
-          exiting={FadeOutDown.duration(10)}
-          style={styles.partName}
-        >
-          {formatMessage(`purification.body-parts.${part}`)}
-        </Animated.Text>
+        <Text style={styles.partName}>{formatMessage(`purification.body-parts.${part}`)}</Text>
       </VStack>
       <VStack spacing={10}>
         {['cleaning', 'enlightenment'].map((stage, index) => (
@@ -119,7 +114,7 @@ export default function StageSelector({ part, ...props }: Props) {
       <RulesDialog ref={rulesDialogRef} onEvaluate={handleEvaluate} />
       <ConfirmRestartDialog ref={restartRef} onConfirm={handleConfirm} />
       <ProgressDialog ref={progressDialogRef} />
-    </Animated.View>
+    </View>
   );
 }
 

@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Avatar } from 'react-native-paper';
-import Animated, { FadeInDown, FadeInUp, FadeOut, SlideInDown } from 'react-native-reanimated';
 import Text from '../../../components/Text';
 import VStack from '../../../components/stack/VStack';
 import { Color } from '../../../constants/Color';
@@ -28,41 +27,28 @@ export default function PeriodChooser(props: Props) {
 
   return (
     <View style={GlobalStyles.center}>
-      <Animated.View entering={FadeInUp.delay(300).duration(500).mass(25)} exiting={FadeOut}>
+      <View>
         <Text variant="titleLarge" style={[styles.topTitle, styles.bookTitle]}>
           {formatMessage(TKeys.INVOCATION_IMMUNIZATION_TITLE)}
         </Text>
-      </Animated.View>
+      </View>
       <VStack spacing={1} style={GlobalStyles.center}>
-        <Animated.View
-          entering={FadeInUp.delay(300).duration(400).mass(20)}
-          exiting={FadeOut}
-          style={styles.introduction}
-          onTouchEnd={props.onMetaSelect}
-        >
+        <View style={styles.introduction} onTouchEnd={props.onMetaSelect}>
           <Text variant="titleLarge" style={styles.introductionBody}>
             {formatMessage(TKeys.GENERAL_PRESENTATION_TITLE)}
           </Text>
-        </Animated.View>
-        <Animated.View entering={FadeInDown.delay(300).duration(400).mass(25)} exiting={FadeOut}>
+        </View>
+        <View>
           <Text variant="titleLarge" style={[styles.topTitle, styles.initiation]}>
             {formatMessage(TKeys.INITIATION_TITLE)}
           </Text>
           <Text style={styles.contentText}>{formatMessage(TKeys.INVOCATIONS_IMMUNIZATION_INITIATION)}</Text>
-        </Animated.View>
+        </View>
       </VStack>
 
       <VStack style={styles.container} spacing={12}>
         {periods.map(({ name, image }, index) => (
-          <Animated.View
-            key={name}
-            entering={SlideInDown.delay(100 * (index + 1))
-              .duration(300 * (index + 1))
-              .mass(2)}
-            exiting={FadeOut}
-            style={styles.pressable}
-            onTouchEnd={() => props.onSelect(name as ImmunizationPeriod)}
-          >
+          <View key={name} style={styles.pressable} onTouchEnd={() => props.onSelect(name as ImmunizationPeriod)}>
             <View style={styles.titleContainer}>
               <Avatar.Image source={image} size={60} style={styles.image} />
               <VStack style={styles.titleTop}>
@@ -74,7 +60,7 @@ export default function PeriodChooser(props: Props) {
                 </Text>
               </VStack>
             </View>
-          </Animated.View>
+          </View>
         ))}
       </VStack>
     </View>

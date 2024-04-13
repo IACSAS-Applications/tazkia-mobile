@@ -1,14 +1,7 @@
 import { memo, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Avatar, Divider } from 'react-native-paper';
-import Animated, {
-  FadeInDown,
-  FadeInLeft,
-  FadeInRight,
-  FadeInUp,
-  FadeOutDown,
-  FadeOutLeft,
-} from 'react-native-reanimated';
+import { FadeInDown, FadeInLeft, FadeInUp } from 'react-native-reanimated';
 import Text from '../../../components/Text';
 import HStack from '../../../components/stack/HStack';
 import VStack from '../../../components/stack/VStack';
@@ -44,7 +37,7 @@ function Day({ day, partNumbers, onInfo }: Props) {
   }
 
   return (
-    <Animated.View
+    <View
       style={[
         styles.row,
         {
@@ -60,9 +53,7 @@ function Day({ day, partNumbers, onInfo }: Props) {
         {!first && !last && <Avatar.Text label={day.toString()} size={22} style={styles.id} color="white" />}
         <HStack style={{ ...styles.container, paddingVertical: first || last ? 1 : 4 }}>
           {!first && !last && (
-            <Animated.Text
-              entering={FadeInRight.delay(300).duration(400).mass(13)}
-              exiting={FadeOutLeft.duration(200).mass(1)}
+            <Text
               style={{
                 ...styles.title,
                 color: first || last ? 'white' : 'black',
@@ -71,11 +62,9 @@ function Day({ day, partNumbers, onInfo }: Props) {
               }}
             >
               {formatMessage(`day.${day}`)}
-            </Animated.Text>
+            </Text>
           )}
-          <Animated.Text
-            entering={fade.delay(500).duration(400).mass(13)}
-            exiting={FadeOutLeft.duration(200).mass(1)}
+          <Text
             style={{
               ...styles.title,
               color: first || last ? 'white' : 'teal',
@@ -84,15 +73,11 @@ function Day({ day, partNumbers, onInfo }: Props) {
             }}
           >
             {formatMessage(titleKey)}
-          </Animated.Text>
+          </Text>
         </HStack>
       </HStack>
       {isOpen && (
-        <Animated.View
-          entering={FadeInUp.duration(400).mass(1)}
-          exiting={FadeOutDown.duration(200).mass(1)}
-          style={styles.main}
-        >
+        <View style={styles.main}>
           {Array.from({ length: partNumbers }, (_, i) => i + 1).map((part) => (
             <VStack key={`${day}_${part}`} spacing={25} style={styles.box}>
               <Text variant="bodyMedium" style={styles.partTitle}>
@@ -107,9 +92,9 @@ function Day({ day, partNumbers, onInfo }: Props) {
               {part !== partNumbers && <Divider style={styles.divider} />}
             </VStack>
           ))}
-        </Animated.View>
+        </View>
       )}
-    </Animated.View>
+    </View>
   );
 }
 

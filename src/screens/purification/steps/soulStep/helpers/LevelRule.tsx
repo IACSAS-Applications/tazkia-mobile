@@ -2,7 +2,6 @@ import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TouchableRipple } from 'react-native-paper';
-import Animated, { SlideInLeft } from 'react-native-reanimated';
 import Text from '../../../../../components/Text';
 import Restart from '../../../../../components/progress/Restart';
 import RuleProgress from '../../../../../components/progress/RuleProgress';
@@ -128,7 +127,7 @@ export default function LevelRule({ part, index, levelKey, ...props }: Props) {
               {formatMessage(TKeys.LEVEL, { value: index })}
             </Text>
           </HStack>
-          <Animated.View entering={SlideInLeft.duration(10).springify()}>
+          <View>
             {!current ? (
               <Start onStart={handleStart} />
             ) : (
@@ -144,7 +143,7 @@ export default function LevelRule({ part, index, levelKey, ...props }: Props) {
                 {progressProps.completed && <Restart onClick={props.onRestart} />}
               </HStack>
             )}
-          </Animated.View>
+          </View>
         </HStack>
         {showDetails && (
           <RuleProgress

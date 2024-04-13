@@ -1,8 +1,7 @@
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import { memo } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-paper';
-import Animated, { FadeInUp, SlideOutDown } from 'react-native-reanimated';
 import { useMessage } from '../../hooks/use-message';
 import { TKeys } from '../../locales/constants';
 import GlobalStyles from '../../styles/GlobalStyles';
@@ -16,10 +15,7 @@ const YesNoButtons = memo(function YesNoButtons(props: Props) {
   const { formatMessage } = useMessage();
 
   return (
-    <Animated.View
-      entering={FadeInUp.delay(400).duration(800).springify()}
-      exiting={SlideOutDown.delay(10).damping(100)}
-    >
+    <View>
       <HStack spacing={15} style={GlobalStyles.center}>
         <Button
           mode="elevated"
@@ -48,7 +44,7 @@ const YesNoButtons = memo(function YesNoButtons(props: Props) {
           </Text>
         </Button>
       </HStack>
-    </Animated.View>
+    </View>
   );
 });
 

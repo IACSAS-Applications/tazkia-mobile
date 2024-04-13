@@ -3,7 +3,6 @@ import { PrimitiveType } from 'react-intl';
 import { StyleSheet, View } from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { Avatar } from 'react-native-paper';
-import Animated, { FadeInDown, FadeInLeft, FadeOut } from 'react-native-reanimated';
 import { Color } from '../../constants/Color';
 import { Font } from '../../constants/Font';
 import { SCREEN_WIDTH } from '../../constants/Screen';
@@ -41,14 +40,7 @@ function PressableItem({ inProgress, ...props }: Props) {
   const id = props.index + 1;
 
   return (
-    <Animated.View
-      entering={FadeInDown.delay(speed * (id / 2))
-        .duration(300)
-        .mass(21)}
-      exiting={FadeOut}
-      style={{ marginBottom: 7 }}
-      onTouchEnd={() => props.onPress(props.index + 1)}
-    >
+    <View style={{ marginBottom: 7 }} onTouchEnd={() => props.onPress(props.index + 1)}>
       <HStack
         style={{
           ...styles.part,
@@ -101,10 +93,7 @@ function PressableItem({ inProgress, ...props }: Props) {
         <HStack style={GlobalStyles.center}>
           <View style={{ width: (props.circularProgressRadius ?? 0) * 2 }}>
             {inProgress && (
-              <Animated.View
-                entering={FadeInLeft.delay(400).duration(300).springify().stiffness(300)}
-                exiting={FadeOut}
-              >
+              <View>
                 {completed ? (
                   <Icon name="check-all" size={25} color="seagreen" style={{ marginRight: 8 }} />
                 ) : (
@@ -124,13 +113,13 @@ function PressableItem({ inProgress, ...props }: Props) {
                     progressValueStyle={styles.progress}
                   />
                 )}
-              </Animated.View>
+              </View>
             )}
           </View>
           <Icon name="unfold-more-horizontal" size={20} />
         </HStack>
       </HStack>
-    </Animated.View>
+    </View>
   );
 }
 

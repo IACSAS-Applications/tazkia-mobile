@@ -1,9 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 import { lowerFirst } from 'lodash';
 import { useEffect, useMemo, useState } from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
-import Animated, { FadeIn, FadeInDown, FadeInLeft, FadeOut } from 'react-native-reanimated';
+import Text from '../../../components/Text';
 import HStack from '../../../components/stack/HStack';
 import VStack from '../../../components/stack/VStack';
 import { Color } from '../../../constants/Color';
@@ -39,11 +39,7 @@ export default function PressableProgress({ index, item, hasProgress }: Props) {
   }, [hasProgress, purification]);
 
   return (
-    <Animated.View
-      entering={FadeInDown.delay(100 * (index * 1))
-        .duration(400)
-        .mass(1)}
-      exiting={FadeOut}
+    <View
       style={{
         ...styles.part,
         backgroundColor: progress !== undefined ? '#ccf3df' : Color.partDefaultBgColor,
@@ -71,16 +67,10 @@ export default function PressableProgress({ index, item, hasProgress }: Props) {
             />
           )}
         </HStack>
-        <Animated.Text
-          entering={FadeIn}
-          exiting={FadeOut}
-          style={{ fontSize: Font.size(arabic ? 9 : 11), textAlign: 'center', fontFamily: 'Cairo', color: 'teal' }}
-        >
+        <Text style={{ fontSize: Font.size(arabic ? 9 : 11), textAlign: 'center', fontFamily: 'Cairo', color: 'teal' }}>
           {formatMessage(item.name)}
-        </Animated.Text>
-        <Animated.Text
-          entering={FadeInLeft.delay(400).duration(600).mass(1)}
-          exiting={FadeOut}
+        </Text>
+        <Text
           style={{
             fontFamily: 'ReemKufiFun',
             fontSize: Font.size(arabic ? 15 : 13),
@@ -88,9 +78,9 @@ export default function PressableProgress({ index, item, hasProgress }: Props) {
           }}
         >
           {formatMessage(item.description)}
-        </Animated.Text>
+        </Text>
       </VStack>
-    </Animated.View>
+    </View>
   );
 }
 

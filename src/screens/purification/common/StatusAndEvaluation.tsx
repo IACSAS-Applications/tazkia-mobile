@@ -5,6 +5,7 @@ import Text from '../../../components/Text';
 import ProgressInfos from '../../../components/progress/progressStatus/ProgressInfos';
 import HStack from '../../../components/stack/HStack';
 import { Font } from '../../../constants/Font';
+import { isAndroid } from '../../../constants/Platform';
 import ProgressLine from '../../../domains/common/ProgressLine';
 import { useMessage } from '../../../hooks/use-message';
 import { ProgressProps } from '../../../hooks/use-progress';
@@ -54,7 +55,7 @@ export default function StatusAndEvaluation(props: Props) {
             </Text>
           </Button>
         )}
-        <GridButton small={!arabic} onShow={props.onHistory} />
+        {isAndroid && <GridButton small={!arabic} onShow={props.onHistory} />}
       </View>
     </HStack>
   );
