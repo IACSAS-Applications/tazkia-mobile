@@ -8,7 +8,7 @@ export type StackProps = ViewProps & {
   center?: boolean;
   style?: StyleProp<ViewStyle> | undefined;
 };
-export default function Stack({ style, flexDirection, spacing, center, children, ...props }: StackProps) {
+export default function Stack({ style, flexDirection = 'row', spacing, center, children, ...props }: StackProps) {
   let styles: StyleProp<any> = [{ flexDirection, gap: spacing }];
   if (center) {
     styles = [{ alignItems: 'center', justifyContent: 'center' }, styles];
@@ -20,7 +20,3 @@ export default function Stack({ style, flexDirection, spacing, center, children,
     </View>
   );
 }
-
-Stack.defaultProps = {
-  flexDirection: 'row',
-};

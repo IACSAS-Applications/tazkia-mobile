@@ -1,3 +1,4 @@
+import * as Localization from 'expo-localization';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import * as ExpoUpdates from 'expo-updates';
 import { I18nManager, NativeModules, Platform } from 'react-native';
@@ -73,7 +74,7 @@ export function deviceLanguage(): string {
   const systemLanguage =
     Platform.OS === 'ios'
       ? NativeModules.SettingsManager.settings.AppleLocale || NativeModules.SettingsManager.settings.AppleLanguages[0] //iOS 13
-      : NativeModules.I18nManager.localeIdentifier;
+      : I18nManager.getConstants().localeIdentifier;
 
   return systemLanguage.split('_')[0];
 }
@@ -84,7 +85,15 @@ export async function reloadIfNecessary(lang: SupportedLocale) {
   I18nManager.forceRTL(isArabic);
   I18nManager.swapLeftAndRightInRTL(true);
 
-  if ((isArabic && !I18nManager.isRTL) || (!isArabic && I18nManager.isRTL)) {
+  const isRTL = isDirectionRTL();
+
+  console.debug('isRTL', isRTL);
+  console.debug('isArabic', isArabic);
+
+  if ((isArabic && !isRTL) || (!isArabic && isRTL)) {
+    console.log('Restarting...');
+
+    //RNRestart.Restart();
     await ExpoUpdates.reloadAsync();
   }
 }
@@ -106,4 +115,8 @@ export function switchScreenOrientation() {
 export function lines({ day, errors, ..._ }: ProgressLine) {
   const noError = errors.length === 0;
   return Array.from({ length: day + 1 }, (_, i) => (noError ? true : i === day ? false : true));
+}
+
+export function isDirectionRTL() {
+  return Localization.getLocales()[0].textDirection === 'rtl';
 }
